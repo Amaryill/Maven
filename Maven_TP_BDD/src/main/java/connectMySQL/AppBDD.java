@@ -21,6 +21,7 @@ public class AppBDD {
 		bo.importData(laposte_hexasmal);
 		bo.updateData(codeInsee);
 		bo.checkBase();
+		System.out.println();
 	}
 	
 	
