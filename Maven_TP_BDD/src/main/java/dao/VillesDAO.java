@@ -30,8 +30,8 @@ public class VillesDAO {
 			int codePostal = result.getInt("Code_postal");
 			String libelle = result.getString("Libelle_acheminement");
 			String ligne5 = result.getString("Ligne_5");
-			coord.setLongitude(result.getInt("coordonnees_gps"));
-			coord.SetLatitude(result.getInt("blank"));
+			coord.setLongitude(result.getFloat("coordonnees_gps"));
+			coord.SetLatitude(result.getFloat("blank"));
 
 			Villes ville =new Villes(codeINSEE, nom, codePostal, libelle, ligne5, coord);
 			listeVilles.add(ville);		
@@ -40,5 +40,32 @@ public class VillesDAO {
 		result.close();
 		stmt.close();
 		return listeVilles;
+	}
+	
+	public Villes trouverVille(int code_INSEE) throws SQLException {
+		int nombreVilles=0;
+		Villes ville = null;
+		Statement stmt;
+		String query= "Select * from laposte where Code_commune_INSEE="+code_INSEE;
+		stmt = conn.createStatement();
+		ResultSet result = stmt.executeQuery(query);
+		
+		while(result.next()){
+			Coordonnees coord = new Coordonnees();
+			int codeINSEE = result.getInt("Code_commune_INSEE");
+			String nom = result.getString("Nom_commune");
+			int codePostal = result.getInt("Code_postal");
+			String libelle = result.getString("Libelle_acheminement");
+			String ligne5 = result.getString("Ligne_5");
+			coord.setLongitude(result.getFloat("coordonnees_gps"));
+			coord.SetLatitude(result.getFloat("blank"));
+
+			ville = new Villes(codeINSEE, nom, codePostal, libelle, ligne5, coord);
+		     
+		}
+		result.close();
+		stmt.close();
+		
+		return ville;
 	}
 }

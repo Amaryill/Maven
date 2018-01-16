@@ -1,29 +1,29 @@
 package model;
 
 public class Coordonnees {
-	private double longitude;
-	private double latitude;
+	private float longitude;
+	private float latitude;
 	
-	public Coordonnees(double longitude, double latitude) {
+	public Coordonnees(float longitude, float latitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 	public Coordonnees () {
 		
 	}
-	public double getLongitude() {
+	public float getLongitude() {
 		return this.longitude;
 	}
 	
-	public double getLatitude() {
+	public float getLatitude() {
 		return this.latitude;
 	}
 	
-	public double setLongitude(double longitude) {
+	public float setLongitude(float longitude) {
 		return this.longitude = longitude;
 	}
 	
-	public double SetLatitude(double latitude) {
+	public float SetLatitude(float latitude) {
 		return this.latitude = latitude;
 	}
 }

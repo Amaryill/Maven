@@ -26,8 +26,8 @@ public class MavenBO {
 					+ "Code_postal INT,"
 					+ "Libelle_acheminement VARCHAR(100),"
 					+ "Ligne_5 VARCHAR(100),"
-					+ "coordonnees_gps INT,"
-					+ "blank INT)";
+					+ "coordonnees_gps FLOAT,"
+					+ "blank FLOAT)";
 			stmt.executeUpdate(query2);
 			query = "LOAD DATA LOCAL INFILE '"+filename+"'"
 					+ " INTO TABLE laposte"
@@ -35,6 +35,7 @@ public class MavenBO {
 					+ " LINES TERMINATED BY '\n'"
 					+ " IGNORE 1 ROWS";
 			stmt.executeUpdate(query);
+			System.out.println("Import done");
 		}
 		catch(Exception e)
 		{
@@ -71,6 +72,7 @@ public class MavenBO {
 			// call executeUpdate to execute our sql update statement
 			ps.executeUpdate();
 			ps.close();
+			System.out.println("Update done");
 		}
 		catch (SQLException se)
 		{
@@ -88,23 +90,24 @@ public class MavenBO {
 		try
 		{
 			stmt = sqlConnection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			query = "ALTER TABLE laposte" + 
-					"ADD PRIMARY KEY (ID); ";
-			stmt.executeUpdate(query);
-			query2 = "delete from laposte T1 " + 
-					"where PRIMARY KEY (ID) not in (select min(ID) " + 
-					"from laposte T2 where T1.Nom_commune=T2.Nom_commune" +
-					"AND T1.Code_postal=T2.Code_postal" +
-					"AND T1.Ligne_5=T2.Ligne_5" +
-					"AND T1.Libelle_acheminement=T2.Libelle_acheminement" +
+//			query = "ALTER TABLE laposte" + 
+//					"ADD PRIMARY KEY (ID); ";
+//			stmt.executeUpdate(query);
+			query2 = "delete T1 " + 
+					"from laposte as T1, laposte as T2 where T1.Nom_commune>T2.Nom_commune " +
+					"AND T1.Code_postal=T2.Code_postal " +
+					"AND T1.Ligne_5=T2.Ligne_5 " +
+					"AND T1.Libelle_acheminement=T2.Libelle_acheminement " +
 					"AND T1.coordonnees_gps=T2.coordonnees_gps";
 			
 			stmt.executeUpdate(query2);
+			System.out.println("Check done");
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			stmt = null;
+			System.out.println("check error");
 		}
 	}
 }

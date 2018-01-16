@@ -19,6 +19,9 @@ public class Villes {
 	public String ligne_5;
 	Coordonnees coordonnees;
 	
+	public Villes(){
+		
+	}
 	
 	public Villes(int code_commune_INSEE, String nom_commune, int code_postal, String libelle_acheminement, String ligne_5,
 			Coordonnees coordonnees) {

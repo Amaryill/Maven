@@ -39,12 +39,19 @@
 <h1>Contenu de la BDD La poste</h1>
 <h1 class="text-center">Villes</h1>
 	<form action="GetDistance" method="POST">
+		<%
+				if (request.getAttribute("Distance")!=null){
+					out.println("<h1>La distance est de : "+request.getAttribute("Distance")+"km</h1>");
+				}
+			%>
 		<div class="row">
+			
 			<button type="submit" class="btn btn-primary">Calculer la
 				distance entre les deux villes</button>
+			
 		</div>
 		<br>
-
+		
 		<div class="row">
 			<div class="col-md-12">
 				<table id="table" class="table table-striped display">
@@ -63,7 +70,7 @@
 					<tbody>
 					<%
 						int i = 0;
-						for (i=0;i<10;i++){
+						for (i=0;i<100;i++){
 							out.println("<tr>");
 							out.println("<td>"+villes.get(i).getCodeCommuneINSEE()+"</td>");
 							out.println("<td>"+villes.get(i).getNom_commune()+"</td>");

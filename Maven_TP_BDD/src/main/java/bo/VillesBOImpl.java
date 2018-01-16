@@ -27,6 +27,15 @@ public class VillesBOImpl implements VillesBO{
 		// TODO Auto-generated method stub
 		return this.dao.trouverVilles();
 	}
+
+
+	@Override
+	public Villes trouverVille(int codeINSEE) throws SQLException {
+		// TODO Auto-generated method stub
+		return this.dao.trouverVille(codeINSEE);
+	}
+	
+	
 	
 	
 
